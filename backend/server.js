@@ -12,15 +12,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log('✅ Connected to MongoDB successfully!');
-    console.log('🎉 Database is ready!');
-  })
-  .catch((error) => {
-    console.log('❌ MongoDB connection failed!');
-    console.log('Error:', error.message);
-  });
+require('dotenv').config();
+const mongoose = require('mongoose');
+
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.log("Mongo ERROR:", err));
 
 app.get('/', (req, res) => {
   res.json({ 
